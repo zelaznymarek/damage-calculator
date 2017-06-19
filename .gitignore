@@ -1,6 +1,8 @@
 # Created by .ignore support plugin (hsz.mobi)
 .gitignore
-app/
+app/Resources
+app/.htaccess
+app/config
 bin/
 build.xml
 composer.lock
