@@ -8,7 +8,7 @@ use App\DamageCalculator\DamageCalculator;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversNothing
+ * @covers \App\DamageCalculator\DamageCalculator
  */
 class DamageCalculatorTest extends TestCase
 {
