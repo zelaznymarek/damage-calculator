@@ -34,6 +34,8 @@ class DamageCalculator
 
     /**
      * Returns the highest damage for given spell.
+     * Starting damage is set to 1, because valid spell begins with 'fe',
+     * which if immediately trimmed.
      */
     public function calculate(string $spell): int
     {
