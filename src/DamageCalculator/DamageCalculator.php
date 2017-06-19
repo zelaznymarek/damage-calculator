@@ -97,7 +97,7 @@ class DamageCalculator
     }
 
     /**
-     * Calculates dagame for single set.
+     * Calculates damage for single set.
      */
     private function calcDmgForSet(string $spell, array $set) : int
     {
