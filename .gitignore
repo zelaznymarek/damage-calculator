@@ -1,0 +1,12 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gitignore
+app/
+bin/
+build.xml
+composer.lock
+phpunit.xml.dist
+tests/AppBundle/
+tests/phpunit.xml
+var/
+vendor/
+web/
