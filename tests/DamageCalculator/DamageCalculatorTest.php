@@ -1,10 +1,15 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Tests\DamageCalculator;
 
 use App\DamageCalculator\DamageCalculator;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @coversNothing
+ */
 class DamageCalculatorTest extends TestCase
 {
     /** @var DamageCalculator */
@@ -36,13 +41,13 @@ class DamageCalculatorTest extends TestCase
     public function validSpell() : array
     {
         return [
-            'validData1' => ['fejeneai', 7],
-            'validData2' => ['fedaineai', 10],
-            'validData5' => ['xxxxxfejejeeaindaiyaiaixxxxxx', 17],
-            'validData6' => ['feeai', 2],
-            'validData7' => ['feaineain', 7],
-            'validData8' => ['fdafafeajain', 1],
-            'validData9' => ['fexxxxxxxxxxai', 0],
+            'validData1'  => ['fejeneai', 7],
+            'validData2'  => ['fedaineai', 10],
+            'validData5'  => ['xxxxxfejejeeaindaiyaiaixxxxxx', 17],
+            'validData6'  => ['feeai', 2],
+            'validData7'  => ['feaineain', 7],
+            'validData8'  => ['fdafafeajain', 1],
+            'validData9'  => ['fexxxxxxxxxxai', 0],
             'validData10' => ['aifejejeeai', 8],
         ];
     }

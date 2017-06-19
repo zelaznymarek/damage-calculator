@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\DamageCalculator;
 
 class DamageCalculator
 {
     private const BEGGINING = 'fe';
-    private const DAI = 'dai';
-    private const AIN = 'ain';
-    private const JEE = 'jee';
-    private const JE = 'je';
-    private const NE = 'ne';
-    private const AI = 'ai';
+    private const DAI       = 'dai';
+    private const AIN       = 'ain';
+    private const JEE       = 'jee';
+    private const JE        = 'je';
+    private const NE        = 'ne';
+    private const AI        = 'ai';
 
     /** @var array */
     private const SUBSPELL_SETS = [
@@ -18,18 +20,18 @@ class DamageCalculator
             self::DAI => 5,
             self::AIN => 3,
             self::JEE => 3,
-            self::JE => 2,
-            self::NE => 2,
-            self::AI => 2,
+            self::JE  => 2,
+            self::NE  => 2,
+            self::AI  => 2,
         ],
         [
             self::DAI => 5,
-            self::AI => 2,
+            self::AI  => 2,
             self::AIN => 3,
             self::JEE => 3,
-            self::JE => 2,
-            self::NE => 2,
-        ]
+            self::JE  => 2,
+            self::NE  => 2,
+        ],
     ];
 
     /**
@@ -37,7 +39,7 @@ class DamageCalculator
      * Starting damage is set to 1, because valid spell begins with 'fe',
      * which if immediately trimmed.
      */
-    public function calculate(string $spell): int
+    public function calculate(string $spell) : int
     {
         if (!$this->isValid($spell)) {
             return 0;
@@ -57,24 +59,24 @@ class DamageCalculator
         if ($spellDamage < 0) {
             return 0;
         }
+
         return $spellDamage;
     }
 
     /**
      * Returns true if spell starts with fe and ends with ai.
      */
-    private function isValid(string $spell): bool
+    private function isValid(string $spell) : bool
     {
-        if (substr_count($spell, static::BEGGINING) !== 1) {
+        if (mb_substr_count($spell, static::BEGGINING) !== 1) {
             return false;
         }
 
-        $fePosition = stripos($spell, static::BEGGINING);
-        $aiPosition = strripos($spell, static::AI);
+        $fePosition = mb_stripos($spell, static::BEGGINING);
+        $aiPosition = mb_strripos($spell, static::AI);
         if (false === $fePosition
             || false === $aiPosition
         ) {
-
             return false;
         }
 
@@ -84,14 +86,14 @@ class DamageCalculator
     /**
      * Returns spell trimmed to format 'fe......ai'
      */
-    private function trimSpell(string $spell): string
+    private function trimSpell(string $spell) : string
     {
-        $fePosition = stripos($spell, static::BEGGINING);
-        $aiPosition = strripos($spell, static::AI);
-        $length = $aiPosition - $fePosition;
-        $start = $fePosition + strlen(static::BEGGINING);
+        $fePosition = mb_stripos($spell, static::BEGGINING);
+        $aiPosition = mb_strripos($spell, static::AI);
+        $length     = $aiPosition - $fePosition;
+        $start      = $fePosition + mb_strlen(static::BEGGINING);
 
-        return substr($spell, $start, $length);
+        return mb_substr($spell, $start, $length);
     }
 
     /**
@@ -100,12 +102,12 @@ class DamageCalculator
     private function calcDmgForSet(string $spell, array $set) : int
     {
         $subspellDamage = 0;
-        while (strlen($spell) > 1) {
+        while (mb_strlen($spell) > 1) {
             $subspellFound = false;
             foreach ($set as $subspell => $damage) {
-                if (0 === stripos($spell, $subspell)) {
+                if (0 === mb_stripos($spell, $subspell)) {
                     $subspellDamage += $damage;
-                    $spell = $this->cutSpell($spell, $subspell);
+                    $spell         = $this->cutSpell($spell, $subspell);
                     $subspellFound = true;
                     break;
                 }
@@ -122,17 +124,17 @@ class DamageCalculator
     /**
      * Removes subspell from the beginning of spell.
      */
-    private function cutSpell(string $spell, string $subspell): string
+    private function cutSpell(string $spell, string $subspell) : string
     {
-        return substr($spell, strlen($subspell));
+        return mb_substr($spell, mb_strlen($subspell));
     }
 
     /**
      * Removes first letter from subspell.
      */
-    private function walkSpell(string $spell): string
+    private function walkSpell(string $spell) : string
     {
-        return substr($spell, 1);
+        return mb_substr($spell, 1);
     }
 
     /**
