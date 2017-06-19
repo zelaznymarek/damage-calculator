@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Tests\DamageCalculator;
-
 
 use App\DamageCalculator\DamageCalculator;
 use PHPUnit\Framework\TestCase;
